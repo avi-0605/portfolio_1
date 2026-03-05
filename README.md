@@ -1,4 +1,4 @@
-# 🌐 Aavani Portfolio
+# 🌐 Portfolio
 
 A modern, interactive developer portfolio built to showcase my projects, skills, and creative work.
 Designed with smooth animations, a custom terminal-style preloader, and a minimal developer-focused UI.
