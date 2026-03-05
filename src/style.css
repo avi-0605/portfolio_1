@@ -22,7 +22,7 @@
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: transparent;
   color: var(--text-main);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -1153,4 +1153,155 @@ footer {
 .marquee-item:hover .marquee-label {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Hire Me & Investment Plans Styles */
+.btn-highlight {
+  background: var(--accent-green);
+  color: var(--bg-color);
+  border: 1px solid var(--accent-green);
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-highlight:hover {
+  background: transparent;
+  color: var(--accent-green);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
+}
+
+.hire-me-page {
+  animation: fadeIn 0.6s ease-out;
+  padding-bottom: 80px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  text-align: center;
+  padding: 100px 40px 60px;
+}
+
+.plans-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 60px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.plan-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.plan-card.popular {
+  border-color: var(--accent-green);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 20px;
+  right: -35px;
+  background: var(--accent-green);
+  color: var(--bg-color);
+  padding: 8px 40px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+  text-transform: uppercase;
+}
+
+.plan-type {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.plan-price {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+}
+
+.plan-price span {
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+.plan-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 30px;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  flex: 1;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.check-icon {
+  color: var(--accent-green);
+  font-size: 1.1rem;
+}
+
+.back-btn {
+  margin-bottom: 40px;
+}
+
+.whatsapp-btn {
+  width: 100%;
+  justify-content: center;
 }

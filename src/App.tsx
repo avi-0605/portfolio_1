@@ -3,11 +3,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Preloader } from './components/Preloader';
 import { AnimatePresence } from 'framer-motion';
+import { InteractiveBackground } from './components/InteractiveBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState('portfolio');
 
     useEffect(() => {
         if (!loading) {
@@ -218,6 +220,7 @@ function App() {
 
     return (
         <>
+            <InteractiveBackground />
             <AnimatePresence>
                 {loading && <Preloader onLoadingComplete={() => setLoading(false)} />}
             </AnimatePresence>
@@ -226,7 +229,18 @@ function App() {
                 {/* Navbar */}
                 <nav className="navbar">
                     <div className="nav-content">
-                        <div className="logo">
+                        <div
+                            className="logo"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                if (currentPage !== 'portfolio') {
+                                    setCurrentPage('portfolio');
+                                    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+                                } else {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }
+                            }}
+                        >
                             <span className="logo-icon"></span>
                             <span className="logo-text">AAVANI</span>
                         </div>
@@ -240,223 +254,312 @@ function App() {
                 </nav>
 
                 {/* Main Content */}
-                <main>
-                    {/* Hero Section */}
-                    <section className="hero" id="hero">
-                        <div className="hero-content">
-                            <p className="section-label">01 / WELCOME</p>
-                            <h1 className="hero-title">Aavani<br /><i>Perumbessi</i></h1>
-                            <p className="hero-subtitle">
-                                BTech CS student passionate about building<br />
-                                meaningful digital experiences with a foundation<br />
-                                in full-stack delivery and problem-solving.
-                            </p>
-                            <div className="early-access-status">
-                                <span className="status-dot"></span> ITM Skills University '28
-                            </div>
-                        </div>
-
-                        <div className="hero-terminal">
-                            <div className="terminal-header">
-                                <div className="terminal-dots">
-                                    <span className="dot red"></span>
-                                    <span className="dot yellow"></span>
-                                    <span className="dot green"></span>
-                                </div>
-                                <div className="terminal-title">aavani.sh — bash</div>
-                            </div>
-                            <div className="terminal-body">
-                                <div className="term-line"><span className="term-prompt">&gt;</span> <span className="term-text type-1">whoami</span></div>
-                                <div className="term-line type-2 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">fetching details...</span></div>
-                                <div className="term-line type-3 hidden"><span className="term-prompt">&gt;</span> <span className="term-text">role: Full Stack Developer</span></div>
-                                <div className="term-line type-4 hidden"><span className="term-prompt success">✓</span> <span className="term-text dim">BTech Computer Science</span></div>
-                                <div className="term-line type-5 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">loading skills... 90%</span></div>
-                                <div className="term-line type-6 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">initializing maxman logistics exp</span></div>
-                                <div className="term-line type-7 hidden"><span className="term-prompt success">✓</span> <span className="term-text type-final">ready.</span></div>
-                            </div>
-                        </div>
-
-                        <div className="scroll-indicator">
-                            <span>SCROLL</span>
-                            <div className="scroll-line"></div>
-                        </div>
-                    </section>
-
-                    {/* About Me Section */}
-                    <section className="about-me" id="about-me">
-                        <div className="section-header center">
-                            <p className="section-label">02 / ABOUT ME</p>
-                            <h2 className="section-title"><i>About Me</i></h2>
-                        </div>
-
-                        <div className="about-content">
-                            <div className="about-image-container">
-                                <img src="/pic.jpeg" alt="Aavani Perumbessi" className="about-image" />
-                            </div>
-                            <div className="about-text">
-                                <p className="about-item-number">01</p>
-                                <h3 className="about-name">Aavani Perumbessi</h3>
-                                <p className="about-desc">
-                                    I’m a second-year BTech CSE student and MERN Stack Developer focused on frontend development and UI/UX design. I enjoy building clean, responsive interfaces and scalable web applications that deliver smooth user experiences.
-                                    <br /><br />
-                                    Beyond code, I love reading books and dancing — hobbies that keep me creative, curious, and balanced. I’m continuously learning and working toward building fast, reliable, and user-focused products.
+                {currentPage === 'portfolio' ? (
+                    <main>
+                        {/* Hero Section */}
+                        <section className="hero" id="hero">
+                            <div className="hero-content">
+                                <p className="section-label">01 / WELCOME</p>
+                                <h1 className="hero-title">Aavani<br /><i>Perumbessi</i></h1>
+                                <p className="hero-subtitle">
+                                    BTech CS student passionate about building<br />
+                                    meaningful digital experiences with a foundation<br />
+                                    in full-stack delivery and problem-solving.
                                 </p>
-                                <p className="about-cta">Currently open to internships, freelance work, and full-time opportunities.</p>
+                                <div className="early-access-status">
+                                    <span className="status-dot"></span> ITM Skills University '28
+                                </div>
                             </div>
-                        </div>
-                    </section>
 
-                    {/* Projects Section */}
-                    <section className="capabilities" id="projects">
-                        <div className="section-header center">
-                            <p className="section-label">03 / PROJECTS</p>
-                            <h2 className="section-title"><i>Recent Work</i></h2>
-                        </div>
+                            <div className="hero-terminal">
+                                <div className="terminal-header">
+                                    <div className="terminal-dots">
+                                        <span className="dot red"></span>
+                                        <span className="dot yellow"></span>
+                                        <span className="dot green"></span>
+                                    </div>
+                                    <div className="terminal-title">aavani.sh — bash</div>
+                                </div>
+                                <div className="terminal-body">
+                                    <div className="term-line"><span className="term-prompt">&gt;</span> <span className="term-text type-1">whoami</span></div>
+                                    <div className="term-line type-2 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">fetching details...</span></div>
+                                    <div className="term-line type-3 hidden"><span className="term-prompt">&gt;</span> <span className="term-text">role: Full Stack Developer</span></div>
+                                    <div className="term-line type-4 hidden"><span className="term-prompt success">✓</span> <span className="term-text dim">BTech Computer Science</span></div>
+                                    <div className="term-line type-5 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">loading skills... 90%</span></div>
+                                    <div className="term-line type-6 hidden"><span className="term-prompt">&gt;</span> <span className="term-text dim">initializing maxman logistics exp</span></div>
+                                    <div className="term-line type-7 hidden"><span className="term-prompt success">✓</span> <span className="term-text type-final">ready.</span></div>
+                                </div>
+                            </div>
 
-                        <div className="projects-container">
-                            <div className="projects-marquee">
-                                <div className="project-card" onClick={() => window.open('https://park-ease-cfa.vercel.app/', '_blank')}>
-                                    <div className="project-image" style={{ backgroundImage: "url('/parkease.png')" }}></div>
-                                    <div className="project-info">
-                                        <h3 className="project-title">PARKEASE</h3>
-                                        <p className="project-description">A real-time parking solution that helps drivers find, book, and manage parking effortlessly.</p>
-                                        <div className="project-tech">
-                                            <span className="tech-pill">MongoDB</span>
-                                            <span className="tech-pill">Express.js</span>
-                                            <span className="tech-pill">React</span>
-                                            <span className="tech-pill">Node.js</span>
+                            <div className="scroll-indicator">
+                                <span>SCROLL</span>
+                                <div className="scroll-line"></div>
+                            </div>
+                        </section>
+
+                        {/* About Me Section */}
+                        <section className="about-me" id="about-me">
+                            <div className="section-header center">
+                                <p className="section-label">02 / ABOUT ME</p>
+                                <h2 className="section-title"><i>About Me</i></h2>
+                            </div>
+
+                            <div className="about-content">
+                                <div className="about-image-container">
+                                    <img src="/pic.jpeg" alt="Aavani Perumbessi" className="about-image" />
+                                </div>
+                                <div className="about-text">
+                                    <p className="about-item-number">01</p>
+                                    <h3 className="about-name">Aavani Perumbessi</h3>
+                                    <p className="about-desc">
+                                        I’m a second-year BTech CSE student and MERN Stack Developer focused on frontend development and UI/UX design. I enjoy building clean, responsive interfaces and scalable web applications that deliver smooth user experiences.
+                                        <br /><br />
+                                        Beyond code, I love reading books and dancing — hobbies that keep me creative, curious, and balanced. I’m continuously learning and working toward building fast, reliable, and user-focused products.
+                                    </p>
+                                    <p className="about-cta">Currently open to internships, freelance work, and full-time opportunities.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Projects Section */}
+                        <section className="capabilities" id="projects">
+                            <div className="section-header center">
+                                <p className="section-label">03 / PROJECTS</p>
+                                <h2 className="section-title"><i>Recent Work</i></h2>
+                            </div>
+
+                            <div className="projects-container">
+                                <div className="projects-marquee">
+                                    <div className="project-card" onClick={() => window.open('https://park-ease-cfa.vercel.app/', '_blank')}>
+                                        <div className="project-image" style={{ backgroundImage: "url('/parkease.png')" }}></div>
+                                        <div className="project-info">
+                                            <h3 className="project-title">PARKEASE</h3>
+                                            <p className="project-description">A real-time parking solution that helps drivers find, book, and manage parking effortlessly.</p>
+                                            <div className="project-tech">
+                                                <span className="tech-pill">MongoDB</span>
+                                                <span className="tech-pill">Express.js</span>
+                                                <span className="tech-pill">React</span>
+                                                <span className="tech-pill">Node.js</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="project-card" onClick={() => window.open('https://avi-0605.github.io/Trade_X/', '_blank')}>
+                                        <div className="project-image" style={{ backgroundImage: "url('/tradex.png')" }}></div>
+                                        <div className="project-info">
+                                            <h3 className="project-title">TRADEX</h3>
+                                            <p className="project-description">A risk-free crypto trading simulator with real-time portfolio tracking and analytics.</p>
+                                            <div className="project-tech">
+                                                <span className="tech-pill">HTML5</span>
+                                                <span className="tech-pill">CSS3</span>
+                                                <span className="tech-pill">JavaScript</span>
+                                                <span className="tech-pill">Firebase</span>
+                                                <span className="tech-pill">CoinGecko API</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="project-card" onClick={() => window.open('https://avi-0605.github.io/Make_My-Trip-_Clone/', '_blank')}>
+                                        <div className="project-image" style={{ backgroundImage: "url('/makemytrip.png')" }}></div>
+                                        <div className="project-info">
+                                            <h3 className="project-title">MAKEMYTRIP CLONE</h3>
+                                            <p className="project-description">A MakeMyTrip-style flight booking system with advanced search, filters, and booking flow.</p>
+                                            <div className="project-tech">
+                                                <span className="tech-pill">HTML5</span>
+                                                <span className="tech-pill">CSS3</span>
+                                                <span className="tech-pill">JavaScript</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="project-card" onClick={() => window.open('https://github.com/avi-0605?tab=repositories', '_blank')}>
+                                        <div className="project-image" style={{ backgroundImage: "url('/banquetpro.png')" }}></div>
+                                        <div className="project-info">
+                                            <h3 className="project-title">BANQUETPRO</h3>
+                                            <p className="project-description">An end-to-end banquet management system streamlining event planning, venue bookings, and financial tracking.</p>
+                                            <div className="project-tech">
+                                                <span className="tech-pill">Next.js</span>
+                                                <span className="tech-pill">React</span>
+                                                <span className="tech-pill">MongoDB</span>
+                                                <span className="tech-pill">Tailwind CSS</span>
+                                                <span className="tech-pill">TypeScript</span>
+                                                <span className="tech-pill">JWT</span>
+                                                <span className="tech-pill">Mongoose</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </section>
 
-                                <div className="project-card" onClick={() => window.open('https://avi-0605.github.io/Trade_X/', '_blank')}>
-                                    <div className="project-image" style={{ backgroundImage: "url('/tradex.png')" }}></div>
-                                    <div className="project-info">
-                                        <h3 className="project-title">TRADEX</h3>
-                                        <p className="project-description">A risk-free crypto trading simulator with real-time portfolio tracking and analytics.</p>
-                                        <div className="project-tech">
-                                            <span className="tech-pill">HTML5</span>
-                                            <span className="tech-pill">CSS3</span>
-                                            <span className="tech-pill">JavaScript</span>
-                                            <span className="tech-pill">Firebase</span>
-                                            <span className="tech-pill">CoinGecko API</span>
-                                        </div>
+                        {/* Skills Section */}
+                        <section className="the-why" id="about">
+                            <div className="section-header center mb-large">
+                                <p className="section-label">04 / SKILLS & EDUCATION</p>
+                                <h2 className="section-title"><i>Core Competencies.</i></h2>
+                            </div>
+                            <div className="absolutes-grid">
+
+                                <div className="absolute-item item-left">
+                                    <p className="item-number">01</p>
+                                    <h3 className="item-title">Languages</h3>
+                                    <div className="marquee-container" style={{ margin: "10px 0" }}>
+                                        {[1, 2].map((group) => (
+                                            <div key={group} className="marquee-content" aria-hidden={group === 2 ? "true" : "false"}>
+                                                {Array(6).fill([
+                                                    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+                                                    { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
+                                                    { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+                                                    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" }
+                                                ]).flat().map((item, index) => (
+                                                    <div key={`${group}-${index}`} className="marquee-item">
+                                                        <img src={item.icon} alt={item.name} className="marquee-icon" />
+                                                        <span className="marquee-label">{item.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
                                     </div>
+                                    <p className="item-desc">Solid foundation in multiple programming paradigms.</p>
                                 </div>
-
-                                <div className="project-card" onClick={() => window.open('https://avi-0605.github.io/Make_My-Trip-_Clone/', '_blank')}>
-                                    <div className="project-image" style={{ backgroundImage: "url('/makemytrip.png')" }}></div>
-                                    <div className="project-info">
-                                        <h3 className="project-title">MAKEMYTRIP CLONE</h3>
-                                        <p className="project-description">A MakeMyTrip-style flight booking system with advanced search, filters, and booking flow.</p>
-                                        <div className="project-tech">
-                                            <span className="tech-pill">HTML5</span>
-                                            <span className="tech-pill">CSS3</span>
-                                            <span className="tech-pill">JavaScript</span>
-                                        </div>
+                                <div className="absolute-item item-right">
+                                    <p className="item-number">02</p>
+                                    <h3 className="item-title">Frameworks</h3>
+                                    <div className="marquee-container" style={{ margin: "10px 0" }}>
+                                        {[1, 2].map((group) => (
+                                            <div key={group} className="marquee-content" aria-hidden={group === 2 ? "true" : "false"}>
+                                                {Array(5).fill([
+                                                    { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+                                                    { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+                                                    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+                                                    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+                                                    { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" }
+                                                ]).flat().map((item, index) => (
+                                                    <div key={`${group}-${index}`} className="marquee-item">
+                                                        <img src={item.icon} alt={item.name} className="marquee-icon" style={{ filter: item.icon.includes('express') ? 'invert(1)' : 'none' }} />
+                                                        <span className="marquee-label">{item.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
                                     </div>
+                                    <p className="item-desc">Experience building responsive full-stack applications.</p>
                                 </div>
-
-                                <div className="project-card" onClick={() => window.open('https://github.com/avi-0605?tab=repositories', '_blank')}>
-                                    <div className="project-image" style={{ backgroundImage: "url('/banquetpro.png')" }}></div>
-                                    <div className="project-info">
-                                        <h3 className="project-title">BANQUETPRO</h3>
-                                        <p className="project-description">An end-to-end banquet management system streamlining event planning, venue bookings, and financial tracking.</p>
-                                        <div className="project-tech">
-                                            <span className="tech-pill">Next.js</span>
-                                            <span className="tech-pill">React</span>
-                                            <span className="tech-pill">MongoDB</span>
-                                            <span className="tech-pill">Tailwind CSS</span>
-                                            <span className="tech-pill">TypeScript</span>
-                                            <span className="tech-pill">JWT</span>
-                                            <span className="tech-pill">Mongoose</span>
-                                        </div>
-                                    </div>
+                                <div className="absolute-item item-left item-last">
+                                    <p className="item-number">03</p>
+                                    <h3 className="item-title">Education</h3>
+                                    <p className="item-desc"><strong>BTech Computer Science</strong> - ITM Skills University (2024-2028)<br />CGPA: 8.9 (First Year)</p>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    {/* Skills Section */}
-                    <section className="the-why" id="about">
-                        <div className="section-header center mb-large">
-                            <p className="section-label">04 / SKILLS & EDUCATION</p>
-                            <h2 className="section-title"><i>Core Competencies.</i></h2>
-                        </div>
-                        <div className="absolutes-grid">
+                        {/* Contact Section */}
+                        <section className="cta" id="cta">
+                            <div className="section-header center">
+                                <p className="section-label">05 / CONNECT</p>
+                                <h2 className="section-title"><i>Get in touch.</i></h2>
+                                <p className="cta-subtitle">Currently seeking new opportunities and collaborations.</p>
+                            </div>
+                            <div className="download-buttons">
+                                <a href="mailto:aavanirp@gmail.com" className="btn btn-outline btn-large">Email Me</a>
+                                <a href="https://github.com/avi-0605" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-large">GitHub</a>
+                                <a href="https://in.linkedin.com/in/aavani-perumbessi-18380a31a" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-large">LinkedIn</a>
+                            </div>
+                            <div style={{ marginTop: '20px', marginBottom: '40px' }}>
+                                <button onClick={() => {
+                                    setCurrentPage('hire-me');
+                                    window.scrollTo(0, 0);
+                                }} className="btn btn-highlight btn-large">Hire Me &rarr;</button>
+                            </div>
+                            <div className="features-list">
+                                <span><span className="status-dot green-dot"></span> Based in Mumbai</span>
+                                <span><span className="status-dot green-dot"></span> Open to Relocate</span>
+                                <span><span className="status-dot green-dot"></span> +91 8452056470</span>
+                            </div>
+                        </section>
+                    </main>
+                ) : (
+                    <div className="hire-me-page">
+                        <header className="page-header">
+                            <button onClick={() => setCurrentPage('portfolio')} className="btn btn-outline back-btn">&larr; Back to Portfolio</button>
+                            <p className="section-label" style={{ color: '#fff', fontSize: '1rem', marginBottom: '10px' }}>WORK WITH AAVANI PERUMBESSI</p>
+                            <h1 className="hero-title" style={{ fontSize: '5rem' }}>HIGH-END<br /><i style={{ color: 'var(--accent-green)' }}>FREELANCE</i> SOLUTIONS</h1>
+                            <p className="section-label" style={{ marginTop: '60px' }}>// FREELANCE_PROTOCOLS</p>
+                            <h2 className="item-title" style={{ marginTop: '20px' }}>INVESTMENT <span style={{ color: 'var(--accent-green)' }}>PLANS</span></h2>
+                            <p className="item-desc" style={{ maxWidth: '600px', margin: '20px auto' }}>Transparent pricing for high-end digital solutions. Limited freelance slots available each month to ensure peak quality.</p>
+                        </header>
 
-                            <div className="absolute-item item-left">
-                                <p className="item-number">01</p>
-                                <h3 className="item-title">Languages</h3>
-                                <div className="marquee-container" style={{ margin: "10px 0" }}>
-                                    {[1, 2].map((group) => (
-                                        <div key={group} className="marquee-content" aria-hidden={group === 2 ? "true" : "false"}>
-                                            {Array(6).fill([
-                                                { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-                                                { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
-                                                { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
-                                                { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" }
-                                            ]).flat().map((item, index) => (
-                                                <div key={`${group}-${index}`} className="marquee-item">
-                                                    <img src={item.icon} alt={item.name} className="marquee-icon" />
-                                                    <span className="marquee-label">{item.name}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
+                        <section className="plans-section">
+                            <div className="plans-grid">
+                                {/* Basic Plan */}
+                                <div className="plan-card">
+                                    <p className="plan-type">Basic Plan</p>
+                                    <h3 className="plan-price"><span>₹</span>9,999</h3>
+                                    <p className="plan-subtitle">For small websites / landing pages</p>
+                                    <ul className="plan-features">
+                                        <li><span className="check-icon">✓</span> 1 modern responsive website</li>
+                                        <li><span className="check-icon">✓</span> clean UI design</li>
+                                        <li><span className="check-icon">✓</span> mobile responsive</li>
+                                        <li><span className="check-icon">✓</span> SEO friendly structure</li>
+                                        <li><span className="check-icon">✓</span> delivery within 5 days</li>
+                                        <li><span className="check-icon">✓</span> 2 revisions</li>
+                                    </ul>
+                                    <a href="https://wa.me/918452056470?text=Hi Aavani, I'm interested in the Basic Plan! Can we discuss the details?" target="_blank" rel="noopener noreferrer" className="btn btn-outline whatsapp-btn">START BASIC PROJECT</a>
                                 </div>
-                                <p className="item-desc">Solid foundation in multiple programming paradigms.</p>
-                            </div>
-                            <div className="absolute-item item-right">
-                                <p className="item-number">02</p>
-                                <h3 className="item-title">Frameworks</h3>
-                                <div className="marquee-container" style={{ margin: "10px 0" }}>
-                                    {[1, 2].map((group) => (
-                                        <div key={group} className="marquee-content" aria-hidden={group === 2 ? "true" : "false"}>
-                                            {Array(5).fill([
-                                                { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
-                                                { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
-                                                { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-                                                { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-                                                { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" }
-                                            ]).flat().map((item, index) => (
-                                                <div key={`${group}-${index}`} className="marquee-item">
-                                                    <img src={item.icon} alt={item.name} className="marquee-icon" style={{ filter: item.icon.includes('express') ? 'invert(1)' : 'none' }} />
-                                                    <span className="marquee-label">{item.name}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className="item-desc">Experience building responsive full-stack applications.</p>
-                            </div>
-                            <div className="absolute-item item-left item-last">
-                                <p className="item-number">03</p>
-                                <h3 className="item-title">Education</h3>
-                                <p className="item-desc"><strong>BTech Computer Science</strong> - ITM Skills University (2024-2028)<br />CGPA: 8.9 (First Year)</p>
-                            </div>
-                        </div>
-                    </section>
 
-                    {/* Contact Section */}
-                    <section className="cta" id="cta">
-                        <div className="section-header center">
-                            <p className="section-label">05 / CONNECT</p>
-                            <h2 className="section-title"><i>Get in touch.</i></h2>
-                            <p className="cta-subtitle">Currently seeking new opportunities and collaborations.</p>
-                        </div>
-                        <div className="download-buttons">
-                            <a href="mailto:aavanirp@gmail.com" className="btn btn-outline btn-large">Email Me</a>
-                            <a href="https://github.com/avi-0605" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-large">GitHub</a>
-                            <a href="https://in.linkedin.com/in/aavani-perumbessi-18380a31a" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-large">LinkedIn</a>
-                        </div>
-                        <div className="features-list">
-                            <span><span className="status-dot green-dot"></span> Based in Mumbai</span>
-                            <span><span className="status-dot green-dot"></span> Open to Relocate</span>
-                            <span><span className="status-dot green-dot"></span> +91 8452056470</span>
-                        </div>
-                    </section>
-                </main>
+                                {/* Standard Plan */}
+                                <div className="plan-card popular">
+                                    <div className="popular-badge">Popular</div>
+                                    <p className="plan-type">Standard Plan</p>
+                                    <h3 className="plan-price"><span>₹</span>17,999</h3>
+                                    <p className="plan-subtitle">Business websites or advanced UI</p>
+                                    <ul className="plan-features">
+                                        <li><span className="check-icon">✓</span> multi-page website</li>
+                                        <li><span className="check-icon">✓</span> modern UI/UX design</li>
+                                        <li><span className="check-icon">✓</span> advanced animations</li>
+                                        <li><span className="check-icon">✓</span> performance optimization</li>
+                                        <li><span className="check-icon">✓</span> responsive for all devices</li>
+                                        <li><span className="check-icon">✓</span> basic SEO setup</li>
+                                        <li><span className="check-icon">✓</span> 4 revisions</li>
+                                        <li><span className="check-icon">✓</span> delivery within 10 days</li>
+                                    </ul>
+                                    <a href="https://wa.me/918452056470?text=Hi Aavani, I'm interested in the Standard Plan! Can we discuss the details?" target="_blank" rel="noopener noreferrer" className="btn btn-highlight whatsapp-btn">START STANDARD PROJECT</a>
+                                </div>
+
+                                {/* Premium Plan */}
+                                <div className="plan-card">
+                                    <p className="plan-type">Premium Plan</p>
+                                    <h3 className="plan-price"><span>₹</span>24,999</h3>
+                                    <p className="plan-subtitle">High-end websites / startups</p>
+                                    <ul className="plan-features">
+                                        <li><span className="check-icon">✓</span> premium UI/UX design</li>
+                                        <li><span className="check-icon">✓</span> complex animations</li>
+                                        <li><span className="check-icon">✓</span> custom components</li>
+                                        <li><span className="check-icon">✓</span> advanced architecture</li>
+                                        <li><span className="check-icon">✓</span> priority support</li>
+                                        <li><span className="check-icon">✓</span> unlimited revisions</li>
+                                        <li><span className="check-icon">✓</span> delivery within 14 days</li>
+                                    </ul>
+                                    <a href="https://wa.me/918452056470?text=Hi Aavani, I'm interested in the Premium Plan! Can we discuss the details?" target="_blank" rel="noopener noreferrer" className="btn btn-outline whatsapp-btn">START PREMIUM PROJECT</a>
+                                </div>
+
+                                {/* Custom Plan */}
+                                <div className="plan-card">
+                                    <p className="plan-type">Custom Plan</p>
+                                    <h3 className="plan-price"><span>₹</span>Custom</h3>
+                                    <p className="plan-subtitle">Tailored for unique needs</p>
+                                    <ul className="plan-features">
+                                        <li><span className="check-icon">✓</span> complex web systems</li>
+                                        <li><span className="check-icon">✓</span> app integrations</li>
+                                        <li><span className="check-icon">✓</span> tailored features</li>
+                                        <li><span className="check-icon">✓</span> dedicated development</li>
+                                    </ul>
+                                    <a href="https://wa.me/918452056470?text=Hi Aavani, I have a custom project idea! Can we discuss the details?" target="_blank" rel="noopener noreferrer" className="btn btn-outline whatsapp-btn">REQUEST CUSTOM QUOTE</a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                )}
 
                 <footer>
                     <p>&copy; 2026 Aavani Perumbessi</p>
