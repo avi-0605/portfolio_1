@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTypeSound } from '../hooks/useTypeSound';
 
 interface TypingLineProps {
@@ -69,7 +69,7 @@ const TypingLine: React.FC<TypingLineProps> = ({ text, isSuccess = false, isStat
             {!isDone && (
                 <motion.span
                     animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}     
                     style={{
                         display: 'inline-block',
                         width: '8px',
